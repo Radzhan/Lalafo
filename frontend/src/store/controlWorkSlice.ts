@@ -1,18 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-interface controlWorkInterface {
+interface lalafoInterface {
 }
 
-const initialState: controlWorkInterface = {
+const initialState: lalafoInterface = {
 };
 
 
 
-export const controlWorkSlice = createSlice({
-  name: "controlWork",
+export const lalafoSlice = createSlice({
+  name: "lalafo",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
   },
 });
 
-export const controlWorkReducer = controlWorkSlice.reducer;
+export const lalafoReducer = lalafoSlice.reducer;

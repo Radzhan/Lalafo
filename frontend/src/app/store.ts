@@ -2,16 +2,16 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from "redux-persist";
 import storage from "redux-persist/es/storage";
 import { usersReducer } from "../features/user/userSlice";
-import { controlWorkReducer } from "../store/controlWorkSlice";
+import { lalafoReducer } from "../store/controlWorkSlice";
 
 const usersPersistConfig = {
-  key: "spotify:users",
+  key: "lalafo:users",
   storage,
   whitelist: ["user"],
 };
 
 const rootReducer = combineReducers({
-  controlWork: controlWorkReducer,
+  lalafo: lalafoReducer,
   users: persistReducer(usersPersistConfig, usersReducer),
 });
 
