@@ -1,13 +1,16 @@
-export interface Product {
+export interface Item {
   _id: string;
   title: string;
   description: string;
   price: number;
   image: string | null;
-  category: Category;
+  category: string;
+  number: string;
+  displayname: string
+  user: string;
 }
 
-export interface ProductMutation {
+export interface ItemMutation {
   category: string;
   title: string;
   description: string;
@@ -18,7 +21,6 @@ export interface ProductMutation {
 export interface Category {
   _id: string;
   title: string;
-  description: string;
 }
 
 export interface RegisterMutation {
@@ -67,7 +69,7 @@ export interface ItemCard {
   _id: string;
 }
 
-export interface Categories{ 
+export interface Categories {
   _id: string;
   title: string;
 }

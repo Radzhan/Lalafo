@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Button, Grid, MenuItem, TextField } from "@mui/material";
-import { ProductMutation } from "../../types";
+import { ItemMutation } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { arrayCategories, getCategories } from "../../store/lalafoSlice";
 import InputBtn from "../../components/inputBtn/inputBtn";
 
 interface Props {
-  onSubmit: (mutation: ProductMutation) => void;
+  onSubmit: (mutation: ItemMutation) => void;
 }
 
 const ItemForm: React.FC<Props> = ({ onSubmit }) => {
   const dispatch = useAppDispatch();
   const categories = useAppSelector(arrayCategories);
-  const [state, setState] = useState<ProductMutation>({
+  const [state, setState] = useState<ItemMutation>({
     category: "",
     title: "",
     price: "",
@@ -49,7 +49,7 @@ const ItemForm: React.FC<Props> = ({ onSubmit }) => {
       <Grid container direction="column" spacing={2}>
         <Grid item xs>
           <TextField
-            sx={{ width: '25%' }}
+            sx={{ width: "25%" }}
             select
             label="Category"
             name="category"
@@ -81,6 +81,7 @@ const ItemForm: React.FC<Props> = ({ onSubmit }) => {
 
         <Grid item xs>
           <TextField
+            inputProps={{ min: 0.1 }}
             id="price"
             label="Price"
             value={state.price}
@@ -92,6 +93,7 @@ const ItemForm: React.FC<Props> = ({ onSubmit }) => {
 
         <Grid item xs>
           <TextField
+            required
             multiline
             rows={3}
             id="description"

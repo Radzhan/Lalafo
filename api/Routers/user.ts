@@ -1,11 +1,11 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import auth, { RequestWithUser } from '../midelware/auth';
-import User from '../Model/User';
+import express from "express";
+import mongoose from "mongoose";
+import auth, { RequestWithUser } from "../midelware/auth";
+import User from "../Model/User";
 
 const usersRouter = express.Router();
 
-usersRouter.post('/', async (req, res, next) => {
+usersRouter.post("/", async (req, res, next) => {
   try {
     const user = new User({
       displayname: req.body.displayname,
@@ -16,7 +16,7 @@ usersRouter.post('/', async (req, res, next) => {
 
     user.generateToken();
     await user.save();
-    return res.send({message: 'Registered successfully!', user});
+    return res.send({ message: "Registered successfully!", user });
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       return res.status(400).send(error);
@@ -26,40 +26,39 @@ usersRouter.post('/', async (req, res, next) => {
   }
 });
 
-usersRouter.post('/sessions', async (req, res, next) => {
-  const user = await User.findOne({username: req.body.username});
+usersRouter.post("/sessions", async (req, res, next) => {
+  const user = await User.findOne({ username: req.body.username });
 
   if (!user) {
-    return res.status(400).send({error: 'Username or password incorrect'});
+    return res.status(400).send({ error: "Username or password incorrect" });
   }
 
   const isMatch = await user.checkPassword(req.body.password);
 
   if (!isMatch) {
-    return res.status(400).send({error: 'Username or password incorrect'});
+    return res.status(400).send({ error: "Username or password incorrect" });
   }
 
   try {
     user.generateToken();
     await user.save();
 
-    return res.send({message: 'Username and password correct!', user});
+    return res.send({ message: "Username and password correct!", user });
   } catch (e) {
     return next(e);
   }
 });
 
-
-usersRouter.delete('/sessions', async (req, res, next) => {
+usersRouter.delete("/sessions", async (req, res, next) => {
   try {
-    const token = req.get('Authorization');
-    const success = {message: 'OK'};
+    const token = req.get("Authorization");
+    const success = { message: "OK" };
 
     if (!token) {
       return res.send(success);
     }
 
-    const user = await User.findOne({token});
+    const user = await User.findOne({ token });
 
     if (!user) {
       return res.send(success);
@@ -71,6 +70,6 @@ usersRouter.delete('/sessions', async (req, res, next) => {
   } catch (e) {
     return next(e);
   }
-})
+});
 
 export default usersRouter;

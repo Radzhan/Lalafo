@@ -15,7 +15,6 @@ app.use("/users", usersRouter);
 app.use("/items", ItemRouter);
 app.use("/categories", CategoryRouter);
 
-
 const run = async () => {
   mongoose.set("strictQuery", false);
   app.use(express.static("public"));

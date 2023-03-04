@@ -51,15 +51,15 @@ const run = async () => {
       title: "iphone 12",
       description: "super powerful phone",
       price: 850,
-      image: 'fixtures/iphone12.jpeg',
+      image: "fixtures/iphone12.jpeg",
       category: phones._id,
       user: first._id,
     },
-		{
+    {
       title: "Football ball",
       description: "ball from World cup 2016",
       price: 2000,
-      image: 'fixtures/CupBall.jpeg',
+      image: "fixtures/CupBall.jpeg",
       category: balls._id,
       user: first._id,
     },
@@ -67,7 +67,7 @@ const run = async () => {
       title: "iphone 13",
       description: "super powerful phone",
       price: 950,
-      image: 'fixtures/iphone13.jpeg',
+      image: "fixtures/iphone13.jpeg",
       category: phones._id,
       user: first._id,
     },
@@ -75,7 +75,7 @@ const run = async () => {
       title: "Macbook 14pro",
       description: "super powerful Laptop",
       price: 2000,
-      image: 'fixtures/macbook14.jpeg',
+      image: "fixtures/macbook14.jpeg",
       category: computer._id,
       user: second._id,
     },
@@ -83,9 +83,9 @@ const run = async () => {
       title: "Macbook 16",
       description: "super powerful laptop",
       price: 2200,
-      image: 'fixtures/macbook16.jpeg',
+      image: "fixtures/macbook16.jpeg",
       category: computer._id,
-			user: second._id,
+      user: second._id,
     }
   );
 

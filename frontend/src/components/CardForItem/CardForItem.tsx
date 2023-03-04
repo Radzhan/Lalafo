@@ -6,19 +6,29 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { BaseUrl } from "../../constants";
 
 interface Props {
   image: string;
   title: string;
   price: number;
+  id: string;
 }
 
-const CardForItem: React.FC<Props> = ({ image, title, price }) => {
+const CardForItem: React.FC<Props> = ({ id, image, title, price }) => {
+  const navigate = useNavigate();
+
+  const navigateTo = (id: string) => {
+    navigate("/" + id);
+  };
   const cardImage = BaseUrl + "/" + image;
   return (
     <div>
-      <Card sx={{ width: 200 , my: 4, height: 250}}>
+      <Card
+        sx={{ width: 200, my: 4, height: 250 }}
+        onClick={() => navigateTo(id)}
+      >
         <CardActionArea>
           <CardMedia
             component="img"

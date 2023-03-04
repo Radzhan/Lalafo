@@ -43,6 +43,7 @@ const InputBtn: React.FC<Props> = ({ onChange, name, label }) => {
             disabled
             label={label}
             value={filename}
+            required
             onClick={activateInput}
           />
         </Grid>

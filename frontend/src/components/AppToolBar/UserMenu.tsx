@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { Button, Menu, MenuItem } from '@mui/material';
-import { useAppDispatch } from '../../app/hooks';
-import { User } from '../../types';
-import { logout } from '../../features/user/userThunks';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Button, Menu, MenuItem } from "@mui/material";
+import { useAppDispatch } from "../../app/hooks";
+import { User } from "../../types";
+import { logout } from "../../features/user/userThunks";
+import { useNavigate } from "react-router-dom";
 interface Props {
   user: User;
 }
 
-const UserMenu: React.FC<Props> = ({user}) => {
+const UserMenu: React.FC<Props> = ({ user }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -25,15 +25,12 @@ const UserMenu: React.FC<Props> = ({user}) => {
   };
 
   const navigateTo = () => {
-    navigate('/newItem')
-  }
+    navigate("/newItem");
+  };
 
   return (
     <>
-      <Button
-        onClick={handleClick}
-        color="inherit"
-      >
+      <Button onClick={handleClick} color="inherit">
         Hello, {user.username}
       </Button>
       <Menu

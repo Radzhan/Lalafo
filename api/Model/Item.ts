@@ -37,6 +37,7 @@ const ItemSchema = new Schema({
   },
   price: {
     type: Number,
+    min: 0.1,
     required: [true, "is't for free ?"],
   },
 });

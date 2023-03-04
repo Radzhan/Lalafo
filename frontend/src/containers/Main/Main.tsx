@@ -1,16 +1,21 @@
 import React, { useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import CardForItem from "../../components/CardForItem/CardForItem";
+import Spinner from "../../components/Spinner/Spinner";
 import {
   arrayCategories,
   arrayItems,
+  forItem,
   getAllItems,
   getCategories,
 } from "../../store/lalafoSlice";
 
 const Main = () => {
+  const navigate = useNavigate();
   const Items = useAppSelector(arrayItems);
   const Categories = useAppSelector(arrayCategories);
+  const forSpinner = useAppSelector(forItem);
   const dispatch = useAppDispatch();
 
   const getAll = useCallback(async () => {
@@ -25,6 +30,7 @@ const Main = () => {
   const createCard = Items.map((element) => {
     return (
       <CardForItem
+        id={element._id}
         key={element._id}
         image={element.image}
         title={element.title}
@@ -33,7 +39,13 @@ const Main = () => {
     );
   });
 
-  return (
+  const navigateTo = (name: string) => {
+    navigate("/category/" + name);
+  };
+
+  return forSpinner ? (
+    <Spinner />
+  ) : (
     <div
       style={{
         justifyContent: "space-between",
@@ -45,7 +57,11 @@ const Main = () => {
         <ul>
           <li>All items</li>
           {Categories.map((element) => {
-            return <li key={element._id}>{element.title}</li>;
+            return (
+              <li onClick={() => navigateTo(element.title)} key={element._id}>
+                {element.title}
+              </li>
+            );
           })}
         </ul>
       </div>

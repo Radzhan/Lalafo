@@ -1,28 +1,33 @@
-import { Typography } from '@mui/material';
-import { useAppDispatch } from '../../app/hooks';
-import { useNavigate } from 'react-router-dom';
-import { ProductMutation } from '../../types';import ItemForm from '../../components/ItemForm/ItemForm';
-import { createItem } from '../../store/lalafoSlice';
-;
-
+import { Typography } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useNavigate } from "react-router-dom";
+import { ItemMutation } from "../../types";
+import ItemForm from "../../components/ItemForm/ItemForm";
+import { createItem, forCreating } from "../../store/lalafoSlice";
+import Spinner from "../../components/Spinner/Spinner";
 const AddNewItem = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const getBoolean = useAppSelector(forCreating);
 
-  const onFormSubmit = async (productMutation: ProductMutation) => {
+  const onFormSubmit = async (productMutation: ItemMutation) => {
     try {
       await dispatch(createItem(productMutation)).unwrap();
-      navigate('/');
+      navigate("/");
     } catch (e) {
-      // error
+      console.error(e)
     }
   };
 
-  return (
-    <>
-      <Typography variant="h4" sx={{mb: 2}}>New product</Typography>
-      <ItemForm onSubmit={onFormSubmit}/>
-    </>
+  return getBoolean ? (
+    <Spinner />
+  ) : (
+    <div>
+      <Typography variant="h4" sx={{ mb: 2 }}>
+        New product
+      </Typography>
+      <ItemForm onSubmit={onFormSubmit} />
+    </div>
   );
 };
 

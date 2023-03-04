@@ -1,7 +1,7 @@
-import { Schema, model, Model, HydratedDocument } from 'mongoose';
-import { IUser } from '../types';
-import bcrypt from 'bcrypt';
-import { randomUUID } from 'crypto';
+import { Schema, model, Model, HydratedDocument } from "mongoose";
+import { IUser } from "../types";
+import bcrypt from "bcrypt";
+import { randomUUID } from "crypto";
 
 const SALT_WORK_FACTOR = 10;
 
@@ -18,35 +18,40 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
     required: true,
     unique: true,
     validate: {
-      validator: async function (this: HydratedDocument<IUser>, username: string): Promise<boolean> {
-        if (!this.isModified('username')) return true;
+      validator: async function (
+        this: HydratedDocument<IUser>,
+        username: string
+      ): Promise<boolean> {
+        if (!this.isModified("username")) return true;
 
-        const user: HydratedDocument<IUser> | null = await User.findOne({username});
+        const user: HydratedDocument<IUser> | null = await User.findOne({
+          username,
+        });
         return !Boolean(user);
       },
-      message: 'This user is already registered',
-    }
+      message: "This user is already registered",
+    },
   },
   password: {
     type: String,
-    required: [true, 'password are required'],
+    required: [true, "password are required"],
   },
   phone: {
     type: String,
-    required: [true, 'phone are required'],
+    required: [true, "phone are required"],
   },
   displayname: {
     type: String,
-    required: [true, 'how they will call u ?'],
+    required: [true, "how they will call u ?"],
   },
   token: {
     type: String,
     required: true,
-  }
+  },
 });
 
-UserSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) {
+UserSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
     return next();
   }
 
@@ -56,21 +61,21 @@ UserSchema.pre('save', async function(next) {
   next();
 });
 
-UserSchema.set('toJSON', {
+UserSchema.set("toJSON", {
   transform: (doc, ret) => {
     delete ret.password;
     return ret;
-  }
+  },
 });
 
-UserSchema.methods.checkPassword = function(password) {
+UserSchema.methods.checkPassword = function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-UserSchema.methods.generateToken = function() {
+UserSchema.methods.generateToken = function () {
   this.token = randomUUID();
 };
 
-const User = model<IUser, UserModel>('User', UserSchema);
+const User = model<IUser, UserModel>("User", UserSchema);
 
 export default User;
