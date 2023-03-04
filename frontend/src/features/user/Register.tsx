@@ -24,6 +24,8 @@ const Register = () => {
   const [state, setState] = useState<RegisterMutation>({
     username: "",
     password: "",
+    displayname: "",
+    phone: "",
   });
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +39,7 @@ const Register = () => {
       await dispatch(register(state)).unwrap();
       navigate("/");
     } catch (e) {
-      // error happened
+      console.error(e);
     }
   };
 
@@ -70,6 +72,7 @@ const Register = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                sx={{ width: 1 }}
                 label="Username"
                 name="username"
                 autoComplete="new-username"
@@ -81,6 +84,7 @@ const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                sx={{ width: 1 }}
                 name="password"
                 label="Password"
                 type="password"
@@ -89,6 +93,32 @@ const Register = () => {
                 onChange={inputChangeHandler}
                 error={Boolean(getFieldError("password"))}
                 helperText={getFieldError("password")}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                sx={{ width: 1 }}
+                name="displayname"
+                label="Display name"
+                type="text"
+                autoComplete="new-displayname"
+                value={state.displayname}
+                onChange={inputChangeHandler}
+                error={Boolean(getFieldError("displayname"))}
+                helperText={getFieldError("displayname")}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                sx={{ width: 1 }}
+                name="phone"
+                label="Phone"
+                type="text"
+                autoComplete="new-phone"
+                value={state.phone}
+                onChange={inputChangeHandler}
+                error={Boolean(getFieldError("phone"))}
+                helperText={getFieldError("phone")}
               />
             </Grid>
           </Grid>
@@ -114,4 +144,3 @@ const Register = () => {
 };
 
 export default Register;
-

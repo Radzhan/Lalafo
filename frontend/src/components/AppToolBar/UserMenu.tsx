@@ -3,11 +3,13 @@ import { Button, Menu, MenuItem } from '@mui/material';
 import { useAppDispatch } from '../../app/hooks';
 import { User } from '../../types';
 import { logout } from '../../features/user/userThunks';
+import { useNavigate } from 'react-router-dom';
 interface Props {
   user: User;
 }
 
 const UserMenu: React.FC<Props> = ({user}) => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -21,6 +23,10 @@ const UserMenu: React.FC<Props> = ({user}) => {
   const handleLogout = () => {
     dispatch(logout());
   };
+
+  const navigateTo = () => {
+    navigate('/newItem')
+  }
 
   return (
     <>
@@ -36,8 +42,7 @@ const UserMenu: React.FC<Props> = ({user}) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
+        <MenuItem onClick={navigateTo}>Add new Item</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </>

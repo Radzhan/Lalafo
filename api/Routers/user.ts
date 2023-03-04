@@ -8,6 +8,8 @@ const usersRouter = express.Router();
 usersRouter.post('/', async (req, res, next) => {
   try {
     const user = new User({
+      displayname: req.body.displayname,
+      phone: req.body.phone,
       username: req.body.username,
       password: req.body.password,
     });
@@ -47,14 +49,6 @@ usersRouter.post('/sessions', async (req, res, next) => {
   }
 });
 
-usersRouter.post('/secret', auth, async (req, res) => {
-  const user = (req as RequestWithUser).user;
-
-  return res.send({
-    message: 'Secret message',
-    username: user.username,
-  });
-});
 
 usersRouter.delete('/sessions', async (req, res, next) => {
   try {

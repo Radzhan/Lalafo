@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from "redux-persist";
 import storage from "redux-persist/es/storage";
 import { usersReducer } from "../features/user/userSlice";
-import { lalafoReducer } from "../store/controlWorkSlice";
+import { lalafoReducer } from "../store/lalafoSlice";
 
 const usersPersistConfig = {
   key: "lalafo:users",

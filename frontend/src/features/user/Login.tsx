@@ -25,6 +25,8 @@ const Login = () => {
   const [state, setState] = useState<LoginMutation>({
     username: "",
     password: "",
+    displayname: "",
+    phone: "",
   });
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,6 +65,7 @@ const Login = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                sx={{ width: 1 }}
                 label="Username"
                 name="username"
                 autoComplete="current-username"
@@ -72,11 +75,34 @@ const Login = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                sx={{ width: 1 }}
                 label="Password"
                 name="password"
                 type="password"
                 autoComplete="current-password"
                 value={state.password}
+                onChange={inputChangeHandler}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                sx={{ width: 1 }}
+                name="displayname"
+                label="Display name"
+                type="text"
+                autoComplete="new-displayname"
+                value={state.displayname}
+                onChange={inputChangeHandler}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                sx={{ width: 1 }}
+                name="phone"
+                label="Phone"
+                type="text"
+                autoComplete="new-phone"
+                value={state.phone}
                 onChange={inputChangeHandler}
               />
             </Grid>
