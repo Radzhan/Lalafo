@@ -37,7 +37,7 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
   },
   displayname: {
     type: String,
-    required: [true, 'how thay will call u ?'],
+    required: [true, 'how they will call u ?'],
   },
   token: {
     type: String,
